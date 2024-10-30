@@ -34,8 +34,7 @@ async fn get_tracker_info(
     provider: &str,
 ) -> Result<ApiResponse, Box<dyn Error>> {
     let url = format!(
-        // TODO: fix CORS for now you should go before to https://cors-anywhere.herokuapp.com/corsdemo
-        "https://cors-anywhere.herokuapp.com/https://gdeposylka.ru/api/v4/tracker/{}/{}",
+        "https://corsanywhere-two.vercel.app/api/proxy?url=https://gdeposylka.ru/api/v4/tracker/{}/{}",
         provider, tracking_number
     );
 
