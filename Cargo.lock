@@ -350,12 +350,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
-name = "cors"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d2dacfa7c8e6a88bacdbd500047e86ac32f67a3706d5b55a1d7b36c80efbc2f"
-
-[[package]]
 name = "critical-section"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2835,11 +2829,9 @@ dependencies = [
 name = "tracking"
 version = "0.1.0"
 dependencies = [
- "cors",
  "dioxus",
  "dioxus-logger",
  "dioxus-sdk",
- "js-sys",
  "manganis",
  "reqwest 0.12.8",
  "serde",
