@@ -1,0 +1,16 @@
+[package]
+name = "tracking"
+version = "0.1.0"
+authors = ["mariesavch <mariesavch@icloud.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "0.5.6", features = ["router", "web"] }
+dioxus-logger = "0.5.1"
+dioxus-sdk = { version = "0.5.0", features = ["storage"]
+manganis = "0.2.2"
+reqwest = { version = "0.12.8", features = ["json"] }
+serde = "1.0.213"
+serde_json = "1.0.132"

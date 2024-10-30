@@ -1,0 +1,24 @@
+[application]
+
+name = "tracking"
+
+default_platform = "web"
+
+out_dir = "dist"
+
+asset_dir = "assets"
+
+[web.app]
+title = "tracking"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "assets"]
+
+[web.resource]
+style = ["assets/tailwind.css"]
+script = []
+
+[web.resource.dev]
+
+script = []
