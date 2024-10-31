@@ -43,7 +43,7 @@ async fn get_tracker_info(
     headers.insert(
         "X-Authorization-Token",
         HeaderValue::from_static(
-            "cd9127350ceb559f60b475e432e367be6b7c4ee4c5ef443aeee46876d5d2b3ad8d2134390e95192b",
+            "e1e9872ba84c0e91a99bf560f92bf60b572cb03074497d59021c3f5904494f6103cfd9b227c4ed9e",
         ),
     );
 
