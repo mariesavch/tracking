@@ -122,7 +122,7 @@ fn App() -> Element {
                         ul { class: "animated-list",
                             {data.data.checkpoints.iter().map(|trackdata|
                             rsx! (
-                            li { class: "pb-8 flex",
+                            li { class: "pb-8",
                                             span { class: "font-bold mr-5", if trackdata.status_raw == "GTMS_SIGNED" {"Reveived"} else {"{trackdata.status_raw}"} }
                                             span { class: "text-overlay0 italic", "{trackdata.time}" }
                             }
@@ -130,6 +130,8 @@ fn App() -> Element {
                         }
                     } else if let Some(Err(error)) = tracking_info.read().as_ref() {
                         p { class: "font-bold text-red", "Try again :) error: {error}" }
+                    } else {
+                        p { class: "text-overlay0 italic", "loading..." }
                     }
                 }
             }
