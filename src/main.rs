@@ -6,6 +6,7 @@ use reqwest::header::{HeaderMap, HeaderValue, CONTENT_TYPE};
 use serde::Deserialize;
 use serde_json::from_str;
 use std::error::Error;
+use tailwind_fuse::tw_merge;
 
 const _TAILWIND_URL: &str = manganis::mg!(file("assets/tailwind.css"));
 
@@ -50,7 +51,6 @@ async fn get_tracker_info(
     let client = reqwest::Client::new();
     let response = client.get(&url).headers(headers).send().await?;
 
-    // Check if the response was successful
     if !response.status().is_success() {
         let status = response.status();
         let body = response.text().await?;
@@ -58,10 +58,8 @@ async fn get_tracker_info(
         return Err(format!("Request failed: {}", status).into());
     }
 
-    // Read the response body as a string
     let response_body = response.text().await?;
 
-    // Attempt to parse the JSON response using serde_json
     let api_response: ApiResponse = from_str(&response_body).map_err(|e| {
         eprintln!("Failed to decode response body: {}", e);
         e
@@ -96,11 +94,13 @@ fn App() -> Element {
                         r#type: "text",
                         autofocus: true,
                         oninput: move |event| track_number.set(event.value()),
-                        class: "rounded-t-lg lg:rounded-none lg:rounded-l-lg w-full
-                                lg:w-1/2 border border-surface0 bg-base py-2 px-4
-                                outline-none transition-colors duration-300
-                                placeholder:text-overlay0 hover:border-surface1
-                                focus:text-text focus:border-surface2 mr-[-1] mb-[-1]"
+                        class: tw_merge!(
+                            "rounded-t-lg lg:rounded-none lg:rounded-l-lg w-full",
+                            "lg:w-1/2 border border-surface0 bg-base py-2 px-4",
+                            "outline-none transition-colors duration-300",
+                            "placeholder:text-overlay0 hover:border-surface1",
+                            "focus:text-text focus:border-surface2 mr-[-1] mb-[-1]"
+                        )
                     }
                     input {
                         aria_label: "Enter provider eg: cainiao",
@@ -110,11 +110,13 @@ fn App() -> Element {
                         r#type: "text",
                         autofocus: true,
                         oninput: move |event| track_provider.set(event.value()),
-                        class: "rounded-b-lg lg:rounded-none lg:rounded-r-lg border w-full
-                                lg:w-1/2 border-surface0 bg-base py-2 px-4
-                                outline-none transition-colors duration-300
-                                placeholder:text-overlay0 hover:border-surface1
-                                focus:text-text focus:border-surface2"
+                        class: tw_merge!(
+                            "rounded-b-lg lg:rounded-none lg:rounded-r-lg border w-full",
+                            "lg:w-1/2 border-surface0 bg-base py-2 px-4",
+                            "outline-none transition-colors duration-300",
+                            "placeholder:text-overlay0 hover:border-surface1",
+                            "focus:text-text focus:border-surface2"
+                        )
                     }
                 }
                 div { class: "mt-8",
