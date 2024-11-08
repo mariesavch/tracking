@@ -5,14 +5,14 @@
   },
   "builds": [
     {
-      "src": "./dist/**",
+      "src": "/target/dx/tracking/release/web/public/**",
       "use": "@now/static"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/$1"
+      "dest": "/target/dx/tracking/release/web/public/$1"
     }
   ]
 }

@@ -8,8 +8,6 @@ use serde_json::from_str;
 use std::error::Error;
 use tailwind_fuse::tw_merge;
 
-const _TAILWIND_URL: &str = manganis::mg!(file("assets/tailwind.css"));
-
 fn main() {
     dioxus_sdk::storage::set_dir!();
     dioxus::launch(App);
@@ -83,6 +81,7 @@ fn App() -> Element {
     });
 
     rsx! {
+        document::Link { rel: "stylesheet", href: asset!("/assets/tailwind.css") }
         main { class: "mx-auto max-w-[850px] px-6 pb-20",
             div { class: "pt-6 min-[950px]:pt-16",
                 div {
@@ -100,7 +99,7 @@ fn App() -> Element {
                             "outline-none transition-colors duration-300",
                             "placeholder:text-overlay0 hover:border-surface1",
                             "focus:text-text focus:border-surface2 mr-[-1] mb-[-1]"
-                        )
+                        ),
                     }
                     input {
                         aria_label: "Enter provider eg: cainiao",
@@ -116,19 +115,24 @@ fn App() -> Element {
                             "outline-none transition-colors duration-300",
                             "placeholder:text-overlay0 hover:border-surface1",
                             "focus:text-text focus:border-surface2"
-                        )
+                        ),
                     }
                 }
                 div { class: "mt-8",
                     if let Some(Ok(data)) = tracking_info.read().as_ref() {
                         ul { class: "animated-list",
-                            {data.data.checkpoints.iter().map(|trackdata|
-                            rsx! (
-                            li { class: "pb-8",
-                                            span { class: "font-bold mr-5", if trackdata.status_raw == "GTMS_SIGNED" {"Reveived"} else {"{trackdata.status_raw}"} }
-                                            span { class: "text-overlay0 italic", "{trackdata.time}" }
-                            }
-                            ))}
+                            {data.data.checkpoints.iter().map(|trackdata| rsx! {
+                                li { class: "pb-8",
+                                    span { class: "font-bold mr-5",
+                                        if trackdata.status_raw == "GTMS_SIGNED" {
+                                            "Reveived"
+                                        } else {
+                                            "{trackdata.status_raw}"
+                                        }
+                                    }
+                                    span { class: "text-overlay0 italic", "{trackdata.time}" }
+                                }
+                            })}
                         }
                     } else if let Some(Err(error)) = tracking_info.read().as_ref() {
                         p { class: "font-bold text-red", "Try again :) error: {error}" }
